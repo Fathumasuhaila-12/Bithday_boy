@@ -1,0 +1,452 @@
+/* =========================================================
+   BIRTHDAY WISH WEBPAGE — STYLESHEET
+   Plain CSS only. Organized by section for readability.
+   ========================================================= */
+
+/* ---------- 1. Design tokens (colors, fonts, sizes) ---------- */
+:root{
+  /* Colors — warm, romantic birthday palette */
+  --plum:        #3a1420;   /* deep text color */
+  --plum-soft:   #bc2957;   /* softer secondary text */
+  --rose:        #b9536b;   /* primary accent */
+  --rose-deep:   #8f3350;   /* strong accent / headings */
+  --blush:       #f7e3e0;   /* light pink surface */
+  --cream:       #fbf3ee;   /* page background base */
+  --gold:        #b9905a;   /* warm gold accent */
+  --gold-soft:   #e4ba71;   /* light gold accent */
+  --paper:       #fffaf6;   /* card / gallery background */
+
+  /* Fonts */
+  --font-script:  'Alex Brush', cursive;
+  --font-serif:   'Cormorant Garamond', serif;
+  --font-display: 'Marcellus', serif;
+
+  /* Layout */
+  --max-width: 760px;
+}
+:root{
+  /* ...existing color and font tokens... */
+
+  /* Layout */
+  --max-width: 760px;
+
+  /* Font size — birthday message only */
+  --font-size-message: 1.35rem;   /* bump this up/down as needed, e.g. 1.5rem for bigger */
+}
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce){
+  *{
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- 2. Base reset ---------- */
+*{
+  box-sizing: border-box;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+body{
+  margin: 0;
+  min-height: 100vh;
+  color: var(--plum);
+  font-family: var(--font-serif);
+  line-height: 1.6;
+  overflow-x: hidden;
+
+  /* Soft, attractive background: warm cream with faint rose and gold glows */
+  background:
+    radial-gradient(circle at 15% 10%, rgba(185, 144, 90, 0.10), transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(185, 83, 107, 0.10), transparent 45%),
+    var(--cream);
+}
+
+a{
+  color: inherit;
+}
+
+img{
+  max-width: 100%;
+  display: block;
+}
+
+hr{
+  border: none;
+}
+
+/* Accessible "screen reader only" helper, kept for reuse */
+.visually-hidden{
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible{
+  outline: 2px solid var(--rose-deep);
+  outline-offset: 3px;
+}
+
+/* ---------- 3. Decorative corner flourishes ---------- */
+.corner-flourish{
+  position: fixed;
+  width: clamp(70px, 12vw, 130px);
+  height: clamp(70px, 12vw, 130px);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.corner-flourish svg{
+  width: 100%;
+  height: 100%;
+}
+
+.corner-flourish.top-left{
+  top: 0;
+  left: 0;
+}
+
+.corner-flourish.bottom-right{
+  bottom: 0;
+  right: 0;
+  transform: rotate(180deg);
+}
+
+/* ---------- 4. Hero section: "Happy Birthday / My Love" ---------- */
+#home{
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 6rem) 1.5rem 2rem;
+  text-align: center;
+}
+
+.hero-eyebrow-heart{
+  font-size: 1.6rem;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  animation: pulse-heart 3.2s ease-in-out infinite;
+}
+
+@keyframes pulse-heart{
+  0%, 100% { transform: scale(1);    opacity: 0.85; }
+  50%      { transform: scale(1.15); opacity: 1;    }
+}
+
+/* Main visual focus of the page */
+.headline{
+  margin: 0;
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: clamp(3.4rem, 13vw, 7.5rem);
+  line-height: 1;
+  color: var(--rose-deep);
+  text-shadow: 2px 2px 0 rgba(185, 144, 90, 0.18);
+}
+
+.subheadline{
+  margin: 0.25rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 5vw, 2.4rem);
+  letter-spacing: 0.12em;
+  color: var(--plum-soft);
+}
+
+.headline-divider{
+  width: 90px;
+  height: 2px;
+  margin: 1.75rem auto;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+
+/* ---------- 5. Birthday message + floating animation ---------- */
+#birthday-message{
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 0 0.5rem;
+}
+
+#birthday-message p{
+  font-size: clamp(1.1rem, 2.6vw, 1.35rem);
+  font-style: italic;
+  color: var(--plum-soft);
+  margin: 0 0 1.15em;
+}
+
+#birthday-message p:last-child{
+  margin-bottom: 0;
+}
+
+/* Gentle dancing / floating animation, staggered per line so the
+   three lines don't move in perfect sync — keeps it soft, not busy */
+.float-line{
+  display: inline-block;
+  animation: dance-float 6s ease-in-out infinite;
+}
+
+.float-line.line-1{ animation-delay: 0s;   }
+.float-line.line-2{ animation-delay: 0.4s; }
+.float-line.line-3{ animation-delay: 0.8s; }
+
+@keyframes dance-float{
+  0%   { transform: translateY(0px)  rotate(0deg);    }
+  25%  { transform: translateY(-6px) rotate(-0.4deg); }
+  50%  { transform: translateY(0px)  rotate(0deg);    }
+  75%  { transform: translateY(6px)  rotate(0.4deg);  }
+  100% { transform: translateY(0px)  rotate(0deg);    }
+}
+
+/* ---------- 6. Photo menu cards ---------- */
+#photo-menu{
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 4rem) 1.5rem;
+}
+
+.menu-heading{
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  margin: 0 0 1.75rem;
+}
+
+.menu-cards{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.menu-card{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 2.2rem 1.25rem;
+  background: var(--paper);
+  border: 1px solid rgba(185, 144, 90, 0.35);
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: var(--font-serif);
+  color: var(--plum);
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(58, 20, 32, 0.06);
+
+  /* Smooth, subtle hover transition */
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease, background 0.35s ease;
+}
+
+/* Subtle hover / focus effect on the two menu cards */
+.menu-card:hover,
+.menu-card:focus-visible{
+  transform: translateY(-4px);
+  border-color: var(--rose);
+  box-shadow: 0 14px 28px rgba(58, 20, 32, 0.12);
+}
+
+.menu-card[aria-pressed="true"]{
+  border-color: var(--rose-deep);
+  background: var(--blush);
+}
+
+.menu-card-icon{
+  font-size: 1.8rem;
+  color: var(--rose);
+}
+
+.menu-card-title{
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.6vw, 1.2rem);
+  letter-spacing: 0.06em;
+  font-weight: 400;
+}
+
+.menu-card-sub{
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--plum-soft);
+  margin: 0;
+}
+
+/* ---------- 7. Photo galleries ---------- */
+.gallery-section{
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem clamp(3rem, 7vw, 5rem);
+}
+
+.gallery-section[hidden]{
+  display: none;
+}
+
+.gallery-section-header{
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.gallery-section-header h2{
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 4.5vw, 2.2rem);
+  color: var(--rose-deep);
+  margin: 0 0 0.4rem;
+}
+
+.gallery-section-header p{
+  font-style: italic;
+  color: var(--plum-soft);
+  margin: 0;
+}
+
+/* Clean, responsive photo-grid: columns adjust automatically */
+.gallery-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.gallery-item{
+  background: var(--paper);
+  border: 1px solid rgba(185, 144, 90, 0.3);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(58, 20, 32, 0.06);
+
+  /* Smooth hover lift for each photo card */
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.gallery-item:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 16px 30px rgba(58, 20, 32, 0.14);
+}
+
+.gallery-item .image-container{
+  aspect-ratio: 4 / 5;
+  background: var(--blush);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Rounded corners on photos + subtle zoom on hover */
+.gallery-item img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px 14px 0 0;
+  transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img{
+  transform: scale(1.06);
+}
+
+.gallery-item figcaption{
+  padding: 0.65rem 0.85rem;
+  font-size: 0.92rem;
+  font-style: italic;
+  color: var(--plum-soft);
+  text-align: center;
+}
+
+.close-gallery-btn{
+  display: block;
+  margin: 2rem auto 0;
+  padding: 0.6rem 1.6rem;
+  background: transparent;
+  border: 1px solid var(--gold);
+  border-radius: 20px;
+  color: var(--rose-deep);
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-style: italic;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.close-gallery-btn:hover,
+.close-gallery-btn:focus-visible{
+  background: var(--rose-deep);
+  color: var(--paper);
+}
+
+/* ---------- 8. Footer ---------- */
+footer{
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--gold);
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================================================
+   9. RESPONSIVE DESIGN — media queries
+   ========================================================= */
+
+/* --- Tablet and below --- */
+@media (max-width: 768px){
+  #home{
+    padding-top: 3.5rem;
+  }
+
+  .menu-cards{
+    gap: 1.1rem;
+  }
+
+  .gallery-grid{
+    gap: 1rem;
+  }
+}
+
+/* --- Mobile phones --- */
+@media (max-width: 560px){
+  /* Stack the two photo-menu cards vertically on small screens */
+  .menu-cards{
+    grid-template-columns: 1fr;
+  }
+
+  .menu-card{
+    padding: 1.75rem 1rem;
+  }
+
+  .gallery-grid{
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .close-gallery-btn{
+    width: 100%;
+  }
+}
+
+/* --- Very small phones --- */
+@media (max-width: 360px){
+  .headline{
+    font-size: clamp(2.8rem, 16vw, 4rem);
+  }
+
+  #birthday-message p{
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, My Love</title>
+<meta name="description" content="A birthday wish page for my husband, my love, my favorite person.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Marcellus&display=swap" rel="stylesheet">
+
+<style>
+  /* ============ Design tokens ============ */
+  :root{
+    --plum:        #3a1420;
+    --plum-soft:   #5c2436;
+    --rose:        #b9536b;
+    --rose-deep:   #8f3350;
+    --blush:       #f7e3e0;
+    --cream:       #fbf3ee;
+    --gold:        #b9905a;
+    --gold-soft:   #d9bd8c;
+    --paper:       #fffaf6;
+
+    --font-script: 'Alex Brush', cursive;
+    --font-serif:  'Cormorant Garamond', serif;
+    --font-display:'Marcellus', serif;
+
+    --max-width: 760px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(185,144,90,0.10), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(185,83,107,0.10), transparent 45%),
+      var(--cream);
+    color: var(--plum);
+    font-family: var(--font-serif);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  a{ color: inherit; }
+  img{ max-width: 100%; display: block; }
+
+  .visually-hidden{
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap; border: 0;
+  }
+
+  :focus-visible{
+    outline: 2px solid var(--rose-deep);
+    outline-offset: 3px;
+  }
+
+  /* ============ Decorative corner flourishes ============ */
+  .corner-flourish{
+    position: fixed;
+    width: clamp(70px, 12vw, 130px);
+    height: clamp(70px, 12vw, 130px);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .corner-flourish svg{ width:100%; height:100%; }
+  .corner-flourish.top-left{ top: 0; left: 0; }
+  .corner-flourish.bottom-right{ bottom: 0; right: 0; transform: rotate(180deg); }
+
+  /* ============ Header / Hero ============ */
+  #home{
+    position: relative;
+    z-index: 1;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: clamp(3rem, 8vw, 6rem) 1.5rem 2rem;
+    text-align: center;
+  }
+
+  .hero-eyebrow-heart{
+    font-size: 1.6rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    animation: pulse-heart 3.2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-heart{
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50%      { transform: scale(1.15); opacity: 1; }
+  }
+
+  .headline{
+    margin: 0;
+    font-family: var(--font-script);
+    font-weight: 400;
+    font-size: clamp(3.4rem, 13vw, 7.5rem);
+    line-height: 1;
+    color: var(--rose-deep);
+    text-shadow: 2px 2px 0 rgba(185,144,90,0.18);
+  }
+
+  .subheadline{
+    margin: 0.25rem 0 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 5vw, 2.4rem);
+    letter-spacing: 0.12em;
+    color: var(--plum-soft);
+  }
+
+  .headline-divider{
+    width: 90px;
+    height: 2px;
+    margin: 1.75rem auto;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    border: none;
+  }
+
+  /* ============ Birthday message ============ */
+  #birthday-message{
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 0 0.5rem;
+  }
+
+  #birthday-message p{
+    font-size: clamp(1.1rem, 2.6vw, 1.35rem);
+    font-style: italic;
+    color: var(--plum-soft);
+    margin: 0 0 1.15em;
+  }
+
+  #birthday-message p:last-child{ margin-bottom: 0; }
+
+  /* gentle dancing / floating animation, staggered per line */
+  .float-line{
+    display: inline-block;
+    animation: dance-float 6s ease-in-out infinite;
+  }
+  .float-line.line-1{ animation-delay: 0s; }
+  .float-line.line-2{ animation-delay: 0.4s; }
+  .float-line.line-3{ animation-delay: 0.8s; }
+
+  @keyframes dance-float{
+    0%   { transform: translateY(0px) rotate(0deg); }
+    25%  { transform: translateY(-6px) rotate(-0.4deg); }
+    50%  { transform: translateY(0px) rotate(0deg); }
+    75%  { transform: translateY(6px) rotate(0.4deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+  }
+
+  /* ============ Photo menu ============ */
+  #photo-menu{
+    position: relative;
+    z-index: 1;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 4rem) 1.5rem;
+  }
+
+  .menu-heading{
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    margin: 0 0 1.75rem;
+  }
+
+  .menu-cards{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 560px){
+    .menu-cards{ grid-template-columns: 1fr; }
+  }
+
+  .menu-card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 2.2rem 1.25rem;
+    background: var(--paper);
+    border: 1px solid rgba(185,144,90,0.35);
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: var(--font-serif);
+    color: var(--plum);
+    text-align: center;
+    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+    box-shadow: 0 6px 18px rgba(58,20,32,0.06);
+  }
+
+  .menu-card:hover,
+  .menu-card:focus-visible{
+    transform: translateY(-4px);
+    border-color: var(--rose);
+    box-shadow: 0 14px 28px rgba(58,20,32,0.12);
+  }
+
+  .menu-card[aria-pressed="true"]{
+    border-color: var(--rose-deep);
+    background: var(--blush);
+  }
+
+  .menu-card-icon{
+    font-size: 1.8rem;
+    color: var(--rose);
+  }
+
+  .menu-card-title{
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 2.6vw, 1.2rem);
+    letter-spacing: 0.06em;
+    font-weight: 400;
+  }
+
+  .menu-card-sub{
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--plum-soft);
+    margin: 0;
+  }
+
+  /* ============ Galleries ============ */
+  .gallery-section{
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1.5rem clamp(3rem, 7vw, 5rem);
+  }
+
+  .gallery-section[hidden]{ display: none; }
+
+  .gallery-section-header{
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .gallery-section-header h2{
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 4.5vw, 2.2rem);
+    color: var(--rose-deep);
+    margin: 0 0 0.4rem;
+  }
+
+  .gallery-section-header p{
+    font-style: italic;
+    color: var(--plum-soft);
+    margin: 0;
+  }
+
+  .gallery-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .gallery-item{
+    background: var(--paper);
+    border: 1px solid rgba(185,144,90,0.3);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(58,20,32,0.06);
+  }
+
+  .gallery-item .image-container{
+    aspect-ratio: 4 / 5;
+    background: var(--blush);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .gallery-item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gallery-item figcaption{
+    padding: 0.65rem 0.85rem;
+    font-size: 0.92rem;
+    font-style: italic;
+    color: var(--plum-soft);
+    text-align: center;
+  }
+
+  .close-gallery-btn{
+    display: block;
+    margin: 2rem auto 0;
+    padding: 0.6rem 1.6rem;
+    background: transparent;
+    border: 1px solid var(--gold);
+    border-radius: 3px;
+    color: var(--rose-deep);
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-style: italic;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  .close-gallery-btn:hover,
+  .close-gallery-btn:focus-visible{
+    background: var(--rose-deep);
+    color: var(--paper);
+  }
+
+  /* ============ Footer ============ */
+  footer{
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--gold);
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+
+  <div class="corner-flourish top-left" aria-hidden="true">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2,2 C40,8 8,40 2,2 Z" fill="none" stroke="#b9905a" stroke-width="1"/>
+      <path d="M2,2 Q30,2 30,30" fill="none" stroke="#b9536b" stroke-width="1"/>
+    </svg>
+  </div>
+  <div class="corner-flourish bottom-right" aria-hidden="true">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2,2 C40,8 8,40 2,2 Z" fill="none" stroke="#b9905a" stroke-width="1"/>
+      <path d="M2,2 Q30,2 30,30" fill="none" stroke="#b9536b" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <!-- ============ HOME / HERO ============ -->
+  <header id="home">
+    <p class="hero-eyebrow-heart">&#10084;</p>
+
+    <h1 class="headline">Happy Birthday</h1>
+    <p class="subheadline">My Love</p>
+
+    <hr class="headline-divider">
+
+    <section id="birthday-message" aria-label="Birthday message">
+      <p><span class="float-line line-1">Celebrating your birthday beside you feels like one of the sweetest blessings in my life.</span></p>
+      <p><span class="float-line line-2">I pray that Allah keeps your heart happy, your path beautiful, and our journey together filled with love and blessings.</span></p>
+      <p><span class="float-line line-3">Happy Birthday to my husband, my love, and my favorite person — Barakallahu fi Hayatika.</span></p>
+    </section>
+  </header>
+
+  <!-- ============ PHOTO MENU ============ -->
+  <main>
+    <nav id="photo-menu" aria-label="Photo gallery menu">
+      <p class="menu-heading">A few glimpses to smile at</p>
+
+      <div class="menu-cards">
+        <button type="button" id="btn-solo" class="menu-card" aria-pressed="false" aria-controls="gallery-solo" aria-expanded="false">
+          <span class="menu-card-icon" aria-hidden="true">&#9825;</span>
+          <span class="menu-card-title">MY FAVORITE PERSON</span>
+          <span class="menu-card-sub">his solo pictures</span>
+        </button>
+
+        <button type="button" id="btn-candid" class="menu-card" aria-pressed="false" aria-controls="gallery-candid" aria-expanded="false">
+          <span class="menu-card-icon" aria-hidden="true">&#10022;</span>
+          <span class="menu-card-title">BEAUTIFUL MOMENTS</span>
+          <span class="menu-card-sub">our candid memories</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ============ SOLO GALLERY ============ -->
+    <section id="gallery-solo" class="gallery-section" aria-labelledby="gallery-solo-heading" hidden>
+      <div class="gallery-section-header">
+        <h2 id="gallery-solo-heading">My Favorite Person</h2>
+        <p>Every picture of you is a picture worth loving.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <figure class="gallery-item">
+          <div class="image-container">
+            <img src="images/solo/photo1.jpg" alt="A solo photograph of my husband">
+          </div>
+          <figcaption>My favorite face</figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <div class="image-container">
+            <img src="images/solo/photo2.jpg" alt="A solo photograph of my husband smiling">
+          </div>
+          <figcaption>That smile I love</figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <div class="image-container">
+            <img src="images/solo/photo3.jpg" alt="A solo photograph of my husband in casual clothing">
+          </div>
+          <figcaption>Simply him</figcaption>
+        </figure>
+      <button type="button" class="close-gallery-btn" data-close-target="gallery-solo">Close gallery</button>
+    </section>
+
+    <!-- ============ CANDID GALLERY ============ -->
+    <section id="gallery-candid" class="gallery-section" aria-labelledby="gallery-candid-heading" hidden>
+      <div class="gallery-section-header">
+        <h2 id="gallery-candid-heading">Beautiful Moments</h2>
+        <p>Little memories that we made together.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <figure class="gallery-item">
+          <div class="image-container">
+            <img src="images/candid/candid1.jpg" alt="A candid photograph of us together">
+          </div>
+          <figcaption>One of our sweetest days</figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <div class="image-container">
+            <img src="images/candid/candid2.jpg" alt="A candid photograph from a memory we shared">
+          </div>
+          <figcaption>A memory to treasure</figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <div class="image-container">
+            <img src="images/candid/candid3.jpg" alt="A candid photograph of a special moment">
+          </div>
+          <figcaption>Laughing together</figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <div class="image-container">
+            <img src="images/candid/candid4.jpg" alt="A candid photograph of a shared celebration">
+          </div>
+          <figcaption>A moment worth keeping</figcaption>
+        </figure>
+      </div>
+
+      <button type="button" class="close-gallery-btn" data-close-target="gallery-candid">Close gallery</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with love, for you &#10084;</p>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var buttons = [
+        { btn: document.getElementById('btn-solo'), gallery: document.getElementById('gallery-solo') },
+        { btn: document.getElementById('btn-candid'), gallery: document.getElementById('gallery-candid') }
+      ];
+
+      function closeAll(exceptGallery) {
+        buttons.forEach(function (pair) {
+          if (pair.gallery !== exceptGallery) {
+            pair.gallery.hidden = true;
+            pair.btn.setAttribute('aria-pressed', 'false');
+            pair.btn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      buttons.forEach(function (pair) {
+        pair.btn.addEventListener('click', function () {
+          var isOpen = pair.btn.getAttribute('aria-pressed') === 'true';
+
+          closeAll(null);
+
+          if (!isOpen) {
+            pair.gallery.hidden = false;
+            pair.btn.setAttribute('aria-pressed', 'true');
+            pair.btn.setAttribute('aria-expanded', 'true');
+            pair.gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      document.querySelectorAll('.close-gallery-btn').forEach(function (closeBtn) {
+        closeBtn.addEventListener('click', function () {
+          var targetId = closeBtn.getAttribute('data-close-target');
+          var target = document.getElementById(targetId);
+          var pair = buttons.find(function (p) { return p.gallery.id === targetId; });
+
+          target.hidden = true;
+          if (pair) {
+            pair.btn.setAttribute('aria-pressed', 'false');
+            pair.btn.setAttribute('aria-expanded', 'false');
+            pair.btn.focus();
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
